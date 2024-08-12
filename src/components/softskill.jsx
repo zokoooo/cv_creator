@@ -1,18 +1,18 @@
 import { useRef } from "react"
 
-export default function Softskill({ data }) {
-    let listsftskl = ['Communicative', 'Friendly', 'Fast learner', 'Supporting', 'Stress-resistant', 'Patient']
+export default function Softskill({ onChange }) {
+    let listsftskl = ['Communicative', 'Friendly', 'Fast learner', 'Supporting', 'Stress-resistant', 'Patient'];
 
-    let listChoose = useRef([])
+    let listChoose = useRef([]);
 
     const handle = (e) => {
         const item = e.target.value;
         if (listChoose.current.includes(item)) {
             listChoose.current = listChoose.current.filter(i => i !== item);
-            data({softskill: listChoose.current});
+            onChange({name: "softskill", value: listChoose.current});
         } else { 
             listChoose.current.push(item);
-            data({softskill: listChoose.current});
+            onChange({name: "softskill", value: listChoose.current});
         }
     }
 

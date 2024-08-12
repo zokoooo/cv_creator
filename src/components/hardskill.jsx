@@ -1,27 +1,29 @@
 import { useState } from "react"
 
-export default function Hardskill({ data }) {
+export default function Hardskill({ onChange }) {
     let [listStack, setListStack] = useState([]);
     let [textExp, setTextExp] = useState('');
     let [editIndex, setEditIndex] = useState(-1);
 
+    // Добавляет в state hardskill 
     let addExp = () => {
         if (textExp.trim()) {
             setListStack((prev) => {
-                data({hardskill: [...prev, textExp]})
+                onChange({name: "hardskill", value: [...prev, textExp]})
                 return [...prev, textExp]
             });
             setTextExp('');
         }
     };
 
+    // Добавляет в state hardskill 
     let deleteExp = () => {
         if (listStack.length > 0) {
-            setListStack((prev) => {
-                data({hardskill: listStack.slice(0, -1)})
+            setListStack(() => {
+                onChange({name: "hardskill", value: listStack.slice(0, -1)})
                 return listStack.slice(0, -1)
             });
-        }
+        } 
     };
 
     let editExp = (index) => {
@@ -34,7 +36,7 @@ export default function Hardskill({ data }) {
             let newListStack = [...listStack];
             newListStack[index] = textExp;
             setListStack(() => {
-                data({hardskill: newListStack})
+                onChange({name: "hardskill", value: newListStack})
                 return newListStack
             });
             setEditIndex(-1);
@@ -43,7 +45,7 @@ export default function Hardskill({ data }) {
             let newListStack = [...listStack];
             newListStack.splice(index, 1)
             setListStack(() => {
-                data({hardskill: newListStack})
+                onChange({name: "hardskill", value: newListStack})
                 return newListStack
             });
             setEditIndex(-1);

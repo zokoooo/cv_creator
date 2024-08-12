@@ -202,4 +202,17 @@ label {
 
 input[type='checkbox'] {
     width: 16px;
+    cursor: pointer;
+}
+
+.error_input::placeholder {
+    color: red;
+    opacity: 0.5;
+}
+
+.max_text {
+    margin: 0;
+    padding: 0;
+    text-align: end;
+    font-size: 10px;
 }
