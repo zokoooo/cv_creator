@@ -53,11 +53,17 @@ export default function Hardskill({ onChange }) {
         }
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            addExp(event);
+        }
+    }
+
     return (
         <div className="experience section">
             <p className="title_form">Hard Skills</p>
             <div className="add_exp">
-                <input className="input_exp" onChange={(e) => setTextExp(e.target.value)} value={textExp} type="text" placeholder="For example: React"/>
+                <input className="input_exp" onChange={(e) => setTextExp(e.target.value)} value={textExp} type="text" placeholder="For example: React" onKeyDown={handleKeyDown}/>
                 <button className="button_exp button_blue" onClick={addExp}>Add</button>
                 <button className="button_exp button_blue" onClick={deleteExp}>Delete last</button>
             </div>

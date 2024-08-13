@@ -142,6 +142,8 @@ input:hover {
 .active_animation {
     animation: shake;
     animation-duration: 0.5s;
+    border-color: red;
+    transition-duration: 200ms;
 }
 
 .upload {
