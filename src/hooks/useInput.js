@@ -26,6 +26,7 @@ export default function useInput(initialValue = '', regex = null) {
                     break;
             }
         }
+        
     }
 
     // Обновляем состояние value при изменении
@@ -38,12 +39,17 @@ export default function useInput(initialValue = '', regex = null) {
         setIsDirty(true);
     };
 
+    const resetInput = (event) => {
+        setValue('');
+    }
+
     return {
         value,
         isDirty,
         isValid,
         onChange,
         onBlur,
-        useEffect
+        useEffect,
+        resetInput
     }
 }

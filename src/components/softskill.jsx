@@ -1,18 +1,18 @@
 import { useRef } from "react"
 
-export default function Softskill({ onChange }) {
+export default function Softskill({ onChange, dataInput }) {
     let listsftskl = ['Communicative', 'Friendly', 'Fast learner', 'Supporting', 'Stress-resistant', 'Patient'];
 
-    let listChoose = useRef([]);
+    let listChoose = dataInput.softskill
 
     const handle = (e) => {
         const item = e.target.value;
-        if (listChoose.current.includes(item)) {
-            listChoose.current = listChoose.current.filter(i => i !== item);
-            onChange({name: "softskill", value: listChoose.current});
+        if (listChoose.includes(item)) {
+            listChoose = listChoose.filter(i => i !== item);
+            onChange({name: "softskill", value: listChoose});
         } else { 
-            listChoose.current.push(item);
-            onChange({name: "softskill", value: listChoose.current});
+            listChoose.push(item);
+            onChange({name: "softskill", value: listChoose});
         }
     }
 
@@ -20,7 +20,13 @@ export default function Softskill({ onChange }) {
         <>
             <div className="inputs">
                <p className="title_form">Soft Skills</p>
-              {listsftskl.map((item, index) => (<label htmlFor=""><input type="checkbox" key={index} value={item} onChange={handle}/>{item}</label>))}
+              {listsftskl.map((item, index) => {
+                if (dataInput.softskill.includes(item)) {
+                    return <label htmlFor=""><input type="checkbox" key={index} value={item} checked onChange={handle}/>{item}</label>
+                } else {
+                    return <label htmlFor=""><input type="checkbox" key={index} value={item} onChange={handle}/>{item}</label>
+                }
+                })}
             </div>
         </>
     )

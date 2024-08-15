@@ -14,6 +14,10 @@
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
 
+@keyframes open_modal {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
 * {
     margin: 0;
     padding: 0;
@@ -217,4 +221,73 @@ input[type='checkbox'] {
     padding: 0;
     text-align: end;
     font-size: 10px;
+}
+
+.modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background-color: none;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: open_modal;
+    animation-duration: 300ms;
+}
+
+.modal_block {
+    width: 400px;
+    min-height: 200px;
+    background-color: white;    
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 50px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.text_modal {
+    text-align: center;
+}
+
+.buttons_flex {
+    display: flex;
+    gap: 10px;
+}
+
+.button_yes {
+    background-color: #055f47;
+    min-height: 30px;
+    font-weight: 400;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 12px;
+}
+
+.button_no {
+    min-height: 30px;
+    font-weight: 400;
+    cursor: pointer;
+    background-color: #b81b1b;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 12px;
+}
+
+@media screen and (max-width: 816px) {
+    .back_form {
+        display: flex;
+        flex-direction: column;
+        max-width: 400px;
+    }
+
+    .modal_block {
+        width: 300px;
+    }
 }

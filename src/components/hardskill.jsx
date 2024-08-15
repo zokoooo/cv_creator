@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Hardskill({ onChange }) {
+export default function Hardskill({ onChange, dataInput }) {
     let [listStack, setListStack] = useState([]);
     let [textExp, setTextExp] = useState('');
     let [editIndex, setEditIndex] = useState(-1);
@@ -67,8 +67,8 @@ export default function Hardskill({ onChange }) {
                 <button className="button_exp button_blue" onClick={addExp}>Add</button>
                 <button className="button_exp button_blue" onClick={deleteExp}>Delete last</button>
             </div>
-            <ul className="ul_exp" style={{display: listStack.length > 0 ? "block" : "none"}}>
-                {listStack.map((item, index) => (
+            {listStack.length !== 0 ? <ul className="ul_exp" style={{display: listStack.length > 0 ? "block" : "none"}}>
+                {dataInput.hardskill.map((item, index) => (
                     editIndex === index ? (
                         <input
                             className="input_exp edit"
@@ -78,11 +78,11 @@ export default function Hardskill({ onChange }) {
                             key={index}
                             autoFocus
                         />
-                    ) : (
-                        <li key={index} onClick={() => editExp(index)}>{item}</li>
+                        ) : (
+                            <li key={index} onClick={() => editExp(index)}>{item}</li>
                     )
                 ))}
-            </ul>
+            </ul> : null}
         </div>
     );
 }

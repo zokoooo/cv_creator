@@ -1,20 +1,20 @@
 import { useCallback, useState, useRef, useEffect } from "react";
 import upload from "./img/upload.png";
 
-export default function DragAndDrop({ onChange }) {
+export default function DragAndDrop({ onChange, dataInput, ...props }) {
     let [drag, setDrag] = useState(false);
     let [isActive, setIsActive] = useState(false);
     const fileInputRef = useRef(null);
-    let [imageSrc, setImageSrc] = useState(null);
 
     // Освобождает ссылку на изображении
     useEffect(() => {
+        
         return () => {
-          if (imageSrc) {
-            URL.revokeObjectURL(imageSrc);
+          if (dataInput.imagesrc) {
+            URL.revokeObjectURL(dataInput.imagesrc);
           }
         };
-      }, [imageSrc]);
+      }, [dataInput.imagesrc]);
 
     // Иммитация клика на инпут, когда нажато на div
     const handleDivClick = () => {
@@ -26,13 +26,9 @@ export default function DragAndDrop({ onChange }) {
         const file = event.target.files[0];
         if (file) {
             let src = URL.createObjectURL(file);
-            let image = new Image();
-            image.onload = () => {
-                onChange({name: "imagesrc", value: image});
-            }
-            image.src = src;
-            setImageSrc(src);
+            onChange({name: "imagesrc", value: src});
         };
+        fileInputRef.current.value = '';
     };
 
     // Обработка загруженного файла
@@ -45,10 +41,12 @@ export default function DragAndDrop({ onChange }) {
             if (file.type === "image/png" || file.type === "image/jpeg") {
                 setIsActive(false);
                 const src = URL.createObjectURL(file);
-                setImageSrc(src);
+                onChange({name: "imagesrc", value: src});
+                // setImageSrc(src);
                 console.log('ok');
             } else {
                 setIsActive(true); 
+                onChange({name: "imagesrc", value: null});
                 // Таймер на анимацию
                 setTimeout(() => {
                     setIsActive(false);
@@ -95,7 +93,7 @@ export default function DragAndDrop({ onChange }) {
                 {drag ? drag_t : drag_f}   
             </div>
             <div>
-                {imageSrc && <img className="img_content" src={imageSrc} alt="Uploaded" />}
+                {dataInput.imagesrc && <img className="img_content" src={dataInput.imagesrc} alt="Uploaded" />}
             </div>
         </div>
     )
