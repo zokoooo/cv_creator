@@ -31,7 +31,7 @@ export default function DragAndDrop() {
         if (file) {
             let src = URL.createObjectURL(file);
             dispatch(setImageSrc(src))
-        };
+        }
         fileInputRef.current.value = '';
     };
 
